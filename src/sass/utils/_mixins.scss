@@ -1,0 +1,18 @@
+@mixin clear-fixed{
+    &:before,&:after{
+        content:"";
+        display: table;
+        clear: both;
+    }
+}
+@mixin border-default{
+    border:1px solid $border-color-default;
+}
+@mixin border-bottom($borderWidth,$borderColor:$border-color-default){
+    border-bottom:$borderWidth solid $borderColor;
+}
+@mixin text-ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

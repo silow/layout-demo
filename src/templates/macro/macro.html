@@ -1,0 +1,24 @@
+{% macro buildRole(rowNum,array)%}
+<div class="frozen-head-wrapper">
+    <ul class="frozen-head">
+    {% for col in array%}
+    <li data-col="{{loop.index}}">{{col.name}}</li>
+    {% endfor%}
+    </ul>
+</div>
+<div class="frozen-grid">
+    <ul class="grid-columns">
+        {%for cols in array%}
+            <li class="grid-col" data-col="{{loop.index}}">
+            {%for i in range(0,rowNum)%}
+                {% if cols.role[i]%}
+                    <div class="col-item" data-row="{{i+1}}">{{cols.role[i]}}</div>
+                {%else%}
+                    <div class="col-item" data-row="{{i+1}}"></div>
+                {%endif%}
+            {%endfor%}
+            </li>
+        {%endfor%}
+    </ul>
+</div>
+{% endmacro %}
