@@ -22,11 +22,14 @@ const Config = {
 	dist: 'dist',
 	distImage: 'dist/images',
 	distCss: 'dist/css',
-	distScript: 'dist/js'
+	distScript: 'dist/js',
+	server:{
+		port:8080
+	}
 }
 
 gulp.task('del',(cb)=>{
-	del([
+	return del([
 		"dist/*.*",
 		"dist/css/**/*",
 		"dist/image/*",
@@ -35,8 +38,7 @@ gulp.task('del',(cb)=>{
 })
 
 gulp.task('copy:jquery', (cb) => {
-	gulp.src("node_modules/jquery/dist/jquery.min.js").pipe(gulp.dest(Config.distScript));
-	cb();
+	return gulp.src("node_modules/jquery/dist/jquery.min.js").pipe(gulp.dest(Config.distScript));
 });
 
 gulp.task('nunjucks', () => {
@@ -97,16 +99,6 @@ gulp.task('images', () => {
 		.pipe(browserSync.reload({ stream: true }));
 });
 
-gulp.task("browserSync", () => {
-	browserSync.init({
-		port: 2017,
-		server: {
-			baseDir: [Config.dist],
-			index: Config.index
-		}
-	});
-})
-
 gulp.task("script", () => {
 	return gulp.src("src/script/**/*.js")
 		.pipe(changed(Config.distScript, { hasChanged: changed.compareSha1Digest }))
@@ -118,10 +110,15 @@ gulp.task("script", () => {
 		.pipe(gulp.dest(Config.distScript))
 		.pipe(browserSync.reload({ stream: true }));
 })
-gulp.task('reload',()=>{
+gulp.task('server', ['del','copy:jquery', 'script', 'sass', 'images', 'nunjucks'], function () {
+	browserSync.init({
+		port: Config.server.port,
+		server: {
+			baseDir: [Config.dist],
+			index: Config.index
+		}
+	});
 	gulp.watch('src/sass/**/*.scss', ['sass']);
 	gulp.watch('src/templates/**/*.html', ['nunjucks']);
 	gulp.watch('src/script/**/*.js', ['script']);
-})
-gulp.task('watch', ['del','copy:jquery', 'script', 'sass', 'images', 'nunjucks','browserSync','reload'], function () {
 });
