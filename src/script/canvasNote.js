@@ -1,78 +1,79 @@
-function CanvasNote(opts) {
-    this.width = opts.width||null;
-    this.height = opts.height||null;
-    this.imgUrl = opts.imgUrl||null;
-    this.lineWidth = opts.lineWidth || 2;
-    this.lineColor = opts.lineColor || 'rgba(168,0,20,.1)';
-    this.canvas = document.getElementById(opts.id);
-    this.ctx = this.canvas.getContext('2d');
-    this.cache = opts.data || [];
-    this.img = new Image();
-}
-CanvasNote.prototype = {
-    constructor: CanvasNote,
-    init: function () {
-        var me=this,
-            canvas = me.canvas,
-            ctx = me.ctx,
-            canvasInit = me.canvasInit,
-            reduceframe = me.reduceframe,
-            cache = me.cache, 
-            temp = [];
-        me.imagesInit(me.imgUrl,true);
++function (win) {
+    var tempCache = [];
+    function CanvasNote(opts) {
+        try {
+            this.canvas = document.getElementById(opts.id);
+            if (!this.canvas || !this.canvas instanceof HTMLElement || this.canvas.tagName !== 'CANVAS') {
+                throw new TypeError('id目标元素必须是canvas元素');
+            }
+            this.width = opts.width || null;
+            this.height = opts.height || null;
+            this.lineWidth = opts.lineWidth || 2;
+            this.lineColor = opts.lineColor || 'rgba(168,0,20,.1)';
+            this.ctx = this.canvas.getContext('2d');
+            this.cache = opts.data || [];
+            this.image = opts.image || null;
+            initCanvasEvent.apply(this);
+            initImages.apply(this);
+        } catch (e) {
+            throw e;
+        }
+    }
+    //私有方法
+    /** 初始化canvas事件 */
+    function initCanvasEvent() {
+        var me = this,
+            canvas = this.canvas,
+            ctx = this.ctx,
+            temp = [],
+            html = document.documentElement,
+            body = document.body;
+        ctx.lineWidth = me.lineWidth;
+        ctx.strokeStyle = me.lineColor;
+        ctx.save();
         canvas.onmousedown = function (e) {
             e.preventDefault();
-            var x = e.clientX - canvas.offsetLeft + Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
-            var y = e.clientY - canvas.offsetTop + Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+            var x = e.clientX - canvas.offsetLeft + Math.max(html.scrollLeft, body.scrollLeft);
+            var y = e.clientY - canvas.offsetTop + Math.max(html.scrollTop, body.scrollTop);
             temp.push(x, y);
-            ctx.lineWidth = me.lineWidth;
-            ctx.strokeStyle = me.lineColor;
             ctx.moveTo(x, y);
             ctx.beginPath();
             canvas.onmousemove = function (e) {
                 e.preventDefault();
-                var x = e.clientX - canvas.offsetLeft + Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
-                var y = e.clientY - canvas.offsetTop + Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-                me.reduceframe(temp, x, y)
+                var x = e.clientX - canvas.offsetLeft + Math.max(html.scrollLeft, body.scrollLeft);
+                var y = e.clientY - canvas.offsetTop + Math.max(html.scrollTop, body.scrollTop);
+                reduceframe(temp, x, y)
                 ctx.lineTo(x, y);
                 ctx.stroke();
             };
         }
         canvas.onmouseup = function (e) {
-            cache.push(temp.slice(0))
+            me.cache.push(temp.slice(0))
             temp.length = 0;
             canvas.onmousemove = null;
         }
-    },
-    canvasInit: function () {
-        var me=this,
-            opts=me.cache,
-            ctx=this.ctx;
-        for (var i = 0; i < opts.length; i++) {
-            var opt = opts[i];
-            ctx.moveTo(opt[0], opt[1]);
-            ctx.lineWidth = me.lineWidth;
-            ctx.strokeStyle = me.lineColor;
-            ctx.beginPath();
-            for (var x = 2; x < opt.length; x += 2) {
-                ctx.lineTo(opt[x], opt[x + 1]);
-                ctx.stroke();
+    }
+    /** 初始化当前页 */
+    function initImages() {
+        var me = this,
+            url = this.image;
+        if (typeof url === 'string') {
+            var img = new Image();
+            img.onload = function () {
+                me.canvas.width = this.width;
+                me.canvas.height = this.height;
+                me.ctx.drawImage(this, 0, 0);
+                me.drawNote();
+                me.ctx.save();
             }
+            this.image = img;
+            img.src = url;
+        } else {
+            throw new TypeError('请输入正确的图片地址');
         }
-    },
-    imagesInit: function (url,state) {
-        var me = this;
-        me.img.src =url||me.imgUrl;
-        me.img.onload = function () {
-            me.canvas.width = me.width||this.width;
-            me.canvas.height = me.height||this.height;
-            me.ctx.drawImage(img, 0, 0);
-            if(state){
-                me.canvasInit();
-            }
-        }
-    },
-    reduceframe: function (points, x, y) {
+    }
+    /** 优化笔记轨迹 */
+    function reduceframe(points, x, y) {
         if (points.length < 4) {
             points.push(x, y);
             return;
@@ -123,20 +124,51 @@ CanvasNote.prototype = {
         } else {
             points.push(x, y);
         }
-    },
-    clearNote: function () {
-       this.ctx.restore();
-    },
-    toggleNote:function(state){
-        if(state){
-            this.canvasInit(true);
-        }else{
-            this.clearNote();
-        }
-    },
-    revoke:function(){
-        this.cache.pop();
-        this.imagesInit(this.imgUrl,true);
     }
-
-}
+    //对外接口
+    CanvasNote.prototype = {
+        constructor: CanvasNote,
+        drawNote: function () {
+            var me = this,
+                ctx = this.ctx;
+            for (var i = 0; i < me.cache.length; i++) {
+                var opt = me.cache[i];
+                ctx.moveTo(opt[0], opt[1]);
+                ctx.lineWidth = me.lineWidth;
+                ctx.strokeStyle = me.lineColor;
+                ctx.beginPath();
+                for (var x = 2; x < opt.length; x += 2) {
+                    ctx.lineTo(opt[x], opt[x + 1]);
+                    ctx.stroke();
+                }
+            }
+        },
+        clearNote: function () {
+            tempCache = this.cache.slice(0);
+            this.cache = [];
+            this.ctx.drawImage(this.image, 0, 0);
+        },
+        toggleNote: function (state) {
+            if (state) {
+                this.drawNote();
+            } else {
+                this.ctx.drawImage(this.image, 0, 0);
+            }
+        },
+        revoke: function () {
+            if (this.cache.length == 0) {
+                this.cache = tempCache.slice(0);
+            } else {
+                this.cache.pop();
+            }
+            tempCache = [];
+            this.ctx.drawImage(this.image, 0, 0);
+            this.drawNote();
+        }
+    }
+    Object.defineProperty(CanvasNote.prototype, "constructor", {
+        enumerable: false,
+        value: CanvasNote
+    });
+    win.CanvasNote = CanvasNote;
+}(window);
