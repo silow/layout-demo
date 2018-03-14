@@ -40,7 +40,9 @@ gulp.task('del',(cb)=>{
 gulp.task('copy:jquery', (cb) => {
 	return gulp.src("node_modules/jquery/dist/jquery.min.js").pipe(gulp.dest(Config.distScript));
 });
-
+gulp.task('copy:static', () => {
+	return gulp.src("src/static/**/*").pipe(gulp.dest("dist"));
+});
 gulp.task('nunjucks', () => {
 	var options = {
 		removeComments: true,//删除注释，但是会保留script和style中的注释 
@@ -110,7 +112,7 @@ gulp.task("script", () => {
 		.pipe(gulp.dest(Config.distScript))
 		.pipe(browserSync.reload({ stream: true }));
 })
-gulp.task('server', ['del','copy:jquery', 'script', 'sass', 'images', 'nunjucks'], function () {
+gulp.task('server', ['del','copy:jquery','copy:static', 'script', 'sass', 'images', 'nunjucks'], function () {
 	browserSync.init({
 		port: Config.server.port,
 		server: {

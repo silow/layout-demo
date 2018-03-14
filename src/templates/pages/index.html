@@ -1,162 +1,130 @@
 {% extends 'layouts/base.html' %}
 {% block head %}
+    <link rel="stylesheet" href="css/open-iconic.css">
 {% endblock %}
 {% block content %}
-<div class="left-menu">
-    <div class="page-title clear">
-        <button class="create-btn">
-            <span>create</span>
-            <span>row</span>
+<div class="page-panel">
+    <div class="component-page">
+        <button class="prop-list-btn" data-action="showProp">
+            <span class="oi" data-glyph="clipboard"></span>
         </button>
-        <h3>New Page111</h3>
+        <button class="prop-list-btn" data-action="addRow">
+            <span class="oi" data-glyph="plus"></span>
+        </button>
+        <h4>新页面</h4>
     </div>
-    <div class="page-context">
-        <div class="list-group ast-tree-view">
-            <div class="list-group-item">
-                <h4>Row1</h4>
-                <ul>
-                    <li>
-                        <h5 class="column">Column1</h5>
-                        <ul>
-                            <li>
-                                <h6 class="active">banner</h6>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+    <div class="component-row">
+        <div class="row-head">
+            <button class="prop-list-btn">
+                <span class="oi" data-glyph="clipboard"></span>
+            </button>
+            <button class="prop-list-btn">
+                <span class="oi" data-glyph="plus"></span>
+            </button>
+            <h4>第一行</h4>
+        </div>
+        <div class="row-body">
+            <div class="component-col">
+                <div class="col-head">
+                    <button class="prop-list-btn">
+                        <span class="oi" data-glyph="clipboard"></span>
+                    </button>
+                    <button class="prop-list-btn">
+                        <span class="oi" data-glyph="puzzle-piece"></span>
+                    </button>
+                    <h5>列 1</h5>
+                </div>
+                <div class="col-body">
+                    <div class="component-com">
+                        <button class="prop-list-btn">
+                            <span class="oi" data-glyph="clipboard"></span>
+                        </button>
+                        <h6>组件 1</h6>
+                    </div>
+                </div>
+            </div>   
+            <div class="component-col">
+                <div class="col-head">
+                    <button class="prop-list-btn">
+                        <span class="oi" data-glyph="clipboard"></span>
+                    </button>
+                    <button class="prop-list-btn">
+                        <span class="oi" data-glyph="puzzle-piece"></span>
+                    </button>
+                    <h5>列 2</h5>
+                </div>
+                <div class="col-body">
+                    <div class="component-com">
+                        <button class="prop-list-btn">
+                            <span class="oi" data-glyph="clipboard"></span>
+                        </button>
+                        <h6>组件 2</h6>
+                    </div>
+                    <div class="col-subrow">
+                        <div class="card-title">
+                            SubRow
+                        </div>
+                        <div class="component-com">
+                            <button class="prop-list-btn">
+                                <span class="oi" data-glyph="clipboard"></span>
+                            </button>
+                            <h6>组件 3</h6>
+                        </div>
+                        <div class="component-com">
+                            <button class="prop-list-btn">
+                                <span class="oi" data-glyph="clipboard"></span>
+                            </button>
+                            <h6>组件 4</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</div>
+<div class="view-content">
+    <div class="body">
+        <div class="row" data-row=1>
+            <div class="col" data-col=1 style="width:300px;">
+                <div class="component"></div>
             </div>
-            <div class="list-group-item">
-                <h4>Row2</h4>
-                <ul>
-                    <li>
-                        <h5 class="column">Column1</h5>
-                        <ul>
-                            <li>
-                                <h6>component1</h6>
-                            </li>
-                        </ul>
-                        <h5 class="column">Column2</h5>
-                        <ul>
-                            <li>
-                                <h6>component2</h6>
-                            </li>
-                        </ul>
-                        <h5 class="column">Column3</h5>
-                        <ul>
-                            <li>
-                                <h6>component3</h6>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="list-group-item">
-                <h4>Row3</h4>
-                <ul>
-                    <li>
-                        <h5 class="column">Column1</h5>
-                        <ul>
-                            <li>
-                                <h6>component1</h6>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h5 class="column">Column2</h5>
-                        <li>
-                            <ul>
-                                <li>
-                                    <h6>component31</h6>
-                                </li>
-                            </ul>
-                        </li>
-                </ul>
-            </div>
-            <div class="list-group-item">
-                <h4>Row4</h4>
-                <ul>
-                    <li>
-                        <h5 class="column">Column1</h5>
-                        <ul>
-                            <li>
-                                <h6>footer</h6>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+            <div class="col" data-col=2>
+                <div class="component"></div>
+                <div class="subrow">
+                    <div class="component"></div>
+                    <div class="component"></div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="html-view">
-    <div class="row" data-row="1">
-        <div class="col" data-col="1">
-        </div>
-    </div>
-    <div class="row" data-row="2">
-        <div class="col">
-
-        </div>
-        <div class="col">
-
-        </div>
-        <div class="col">
-
-        </div>
-    </div>
-    <div class="row" data-row="3">
-        <div class="col">
-
-        </div>
-        <div class="col">
-
-        </div>
-    </div>
-    <div class="row" data-row="4">
-        <div class="col" style="width:100%">
-
-        </div>
-    </div>
-</div>
-<div class="property-view">
-    <div class="page-title clear">
-        <h3>Property</h3>
-    </div>
-    <div class="list-group list-form">
-        <div class="list-group-item">
-            <label class="form-label" for="name">name</label>
-            <input class="form-text" type="text" value="banner">
-        </div>
-        <div class="list-group-item">
-            <label class="form-label" for="name">height</label>
-            <input class="form-text" type="text" value="">
-        </div>
-        <div class="list-group-item">
-            <label class="form-label" for="name">URL</label>
-            <input class="form-text" type="text" value="">
-        </div>
-        <div class="list-group-item">
-            <label class="form-label" for="name">class</label>
-            <input class="form-text" type="text" value="">
-        </div>
-        <div class="list-group-item">
-            <label class="form-label" for="name">HTML</label>
-            <input class="form-text" type="text" value="">
-        </div>
-        <div class="list-group-item">
-            <label class="form-label" for="name">describe</label>
-            <textarea class="form-text" value="" style="height:56px"></textarea>
-        </div>
-    </div>
-</div>
-<ul class="menu-bottom">
-    <li class="menu-item"><a href="">选择项目</a></li>
-    <li class="menu-item"><a href="">新建页面</a></li>
-    <li class="menu-item"><a href="">读取</a></li>
-    <li class="menu-item"><a href="">保存</a></li>
-    <li class="menu-item"><a href=""></a></li>
+<ul class="layout-menu">
+    <li class="menu-item">
+        <span class="oi" data-glyph="file"></span>
+        新建
+    </li>
+    <li class="menu-item">
+        <span class="oi" data-glyph="project"></span>
+        加载
+    </li>
+    <li class="menu-item">
+        <span class="oi" data-glyph="fork"></span>
+        克隆
+    </li>
+    <li class="menu-item">
+        <span class="oi" data-glyph="task"></span>
+        保存
+    </li>
+    <li class="menu-item">
+        <span class="oi" data-glyph="data-transfer-download"></span>
+        导出
+    </li>
+    <li class="menu-item fr">
+        <span class="oi" data-glyph="account-logout"></span>
+        退出
+    </li>
 </ul>
 {% endblock%}
 {% block script%}
-    {# <script src="./js/page.js"></script> #}
+    <script src="./js/app.js"></script>
 {% endblock%}
