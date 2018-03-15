@@ -13,74 +13,6 @@
         </button>
         <h4>新页面</h4>
     </div>
-    <div class="component-row">
-        <div class="row-head">
-            <button class="prop-list-btn">
-                <span class="oi" data-glyph="clipboard"></span>
-            </button>
-            <button class="prop-list-btn">
-                <span class="oi" data-glyph="plus"></span>
-            </button>
-            <h4>第一行</h4>
-        </div>
-        <div class="row-body">
-            <div class="component-col">
-                <div class="col-head">
-                    <button class="prop-list-btn">
-                        <span class="oi" data-glyph="clipboard"></span>
-                    </button>
-                    <button class="prop-list-btn">
-                        <span class="oi" data-glyph="puzzle-piece"></span>
-                    </button>
-                    <h5>列 1</h5>
-                </div>
-                <div class="col-body">
-                    <div class="component-com">
-                        <button class="prop-list-btn">
-                            <span class="oi" data-glyph="clipboard"></span>
-                        </button>
-                        <h6>组件 1</h6>
-                    </div>
-                </div>
-            </div>   
-            <div class="component-col">
-                <div class="col-head">
-                    <button class="prop-list-btn">
-                        <span class="oi" data-glyph="clipboard"></span>
-                    </button>
-                    <button class="prop-list-btn">
-                        <span class="oi" data-glyph="puzzle-piece"></span>
-                    </button>
-                    <h5>列 2</h5>
-                </div>
-                <div class="col-body">
-                    <div class="component-com">
-                        <button class="prop-list-btn">
-                            <span class="oi" data-glyph="clipboard"></span>
-                        </button>
-                        <h6>组件 2</h6>
-                    </div>
-                    <div class="col-subrow">
-                        <div class="card-title">
-                            SubRow
-                        </div>
-                        <div class="component-com">
-                            <button class="prop-list-btn">
-                                <span class="oi" data-glyph="clipboard"></span>
-                            </button>
-                            <h6>组件 3</h6>
-                        </div>
-                        <div class="component-com">
-                            <button class="prop-list-btn">
-                                <span class="oi" data-glyph="clipboard"></span>
-                            </button>
-                            <h6>组件 4</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>   
-        </div>
-    </div>
 </div>
 <div class="view-content">
     <div class="body">
@@ -124,7 +56,32 @@
         退出
     </li>
 </ul>
+<div class="model-mask" data-type="model">
+    <div class="model-panel">
+        <div class="panel-head">
+             <span class="oi close" data-action="closeModel" data-glyph="x"></span>
+             <h4>选择组件</h4>
+        </div>
+        <div class="panel-body">
+            <fieldset class="subrow-conf">
+                <legend>
+                    <label class="checkbox-legend">
+                        <input type="checkbox">Create SubRow
+                    </label>    
+                </legend>
+            </fieldset>
+        </div>
+        <div class="panel-footer">
+            <button>
+                <span class="oi" data-glyph="check"></span>保存
+            </button>
+            <button data-action="closeModel">
+                <span class="oi" data-glyph="x" ></span>关闭
+            </button>
+        </div>
+    </div>
+</div>
 {% endblock%}
 {% block script%}
-    <script src="./js/app.js"></script>
+    <script src="js/app.js"></script>
 {% endblock%}

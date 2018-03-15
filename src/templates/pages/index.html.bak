@@ -1,0 +1,130 @@
+{% extends 'layouts/base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="css/open-iconic.css">
+{% endblock %}
+{% block content %}
+<div class="page-panel">
+    <div class="component-page">
+        <button class="prop-list-btn" data-action="showProp">
+            <span class="oi" data-glyph="clipboard"></span>
+        </button>
+        <button class="prop-list-btn" data-action="addRow">
+            <span class="oi" data-glyph="plus"></span>
+        </button>
+        <h4>新页面</h4>
+    </div>
+    <div class="component-row">
+        <div class="row-head">
+            <button class="prop-list-btn">
+                <span class="oi" data-glyph="clipboard"></span>
+            </button>
+            <button class="prop-list-btn">
+                <span class="oi" data-glyph="plus"></span>
+            </button>
+            <h4>第一行</h4>
+        </div>
+        <div class="row-body">
+            <div class="component-col">
+                <div class="col-head">
+                    <button class="prop-list-btn">
+                        <span class="oi" data-glyph="clipboard"></span>
+                    </button>
+                    <button class="prop-list-btn">
+                        <span class="oi" data-glyph="puzzle-piece"></span>
+                    </button>
+                    <h5>列 1</h5>
+                </div>
+                <div class="col-body">
+                    <div class="component-com">
+                        <button class="prop-list-btn">
+                            <span class="oi" data-glyph="clipboard"></span>
+                        </button>
+                        <h6>组件 1</h6>
+                    </div>
+                </div>
+            </div>   
+            <div class="component-col">
+                <div class="col-head">
+                    <button class="prop-list-btn">
+                        <span class="oi" data-glyph="clipboard"></span>
+                    </button>
+                    <button class="prop-list-btn">
+                        <span class="oi" data-glyph="puzzle-piece"></span>
+                    </button>
+                    <h5>列 2</h5>
+                </div>
+                <div class="col-body">
+                    <div class="component-com">
+                        <button class="prop-list-btn">
+                            <span class="oi" data-glyph="clipboard"></span>
+                        </button>
+                        <h6>组件 2</h6>
+                    </div>
+                    <div class="col-subrow">
+                        <div class="card-title">
+                            SubRow
+                        </div>
+                        <div class="component-com">
+                            <button class="prop-list-btn">
+                                <span class="oi" data-glyph="clipboard"></span>
+                            </button>
+                            <h6>组件 3</h6>
+                        </div>
+                        <div class="component-com">
+                            <button class="prop-list-btn">
+                                <span class="oi" data-glyph="clipboard"></span>
+                            </button>
+                            <h6>组件 4</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</div>
+<div class="view-content">
+    <div class="body">
+        <div class="row" data-row=1>
+            <div class="col" data-col=1 style="width:300px;">
+                <div class="component"></div>
+            </div>
+            <div class="col" data-col=2>
+                <div class="component"></div>
+                <div class="subrow">
+                    <div class="component"></div>
+                    <div class="component"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="layout-menu">
+    <li class="menu-item">
+        <span class="oi" data-glyph="file"></span>
+        新建
+    </li>
+    <li class="menu-item">
+        <span class="oi" data-glyph="project"></span>
+        加载
+    </li>
+    <li class="menu-item">
+        <span class="oi" data-glyph="fork"></span>
+        克隆
+    </li>
+    <li class="menu-item">
+        <span class="oi" data-glyph="task"></span>
+        保存
+    </li>
+    <li class="menu-item">
+        <span class="oi" data-glyph="data-transfer-download"></span>
+        导出
+    </li>
+    <li class="menu-item fr">
+        <span class="oi" data-glyph="account-logout"></span>
+        退出
+    </li>
+</ul>
+{% endblock%}
+{% block script%}
+    <script src="./js/app.js"></script>
+{% endblock%}
