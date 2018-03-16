@@ -44,6 +44,9 @@
         },
         closeModel:function(){
             var model=$(this).closest('[data-type]').hide();
+        },
+        createSubRow:function(){
+            $(this).closest('fieldset').toggleClass('createRow').find('.subrow-com-list').toggle();
         }
     }
     function ButtonHtml(icon,action){

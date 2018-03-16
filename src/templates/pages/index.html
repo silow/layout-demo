@@ -63,12 +63,18 @@
              <h4>选择组件</h4>
         </div>
         <div class="panel-body">
+            <div class="component-list">
+                <ul>
+                    <li data-action="selectComponent" data-component="list">List</li>
+                </ul>
+            </div>
             <fieldset class="subrow-conf">
                 <legend>
                     <label class="checkbox-legend">
-                        <input type="checkbox">Create SubRow
-                    </label>    
+                        <input type="checkbox" data-action="createSubRow">Create SubRow
+                    </label> 
                 </legend>
+                <div class="subrow-com-list"></div>   
             </fieldset>
         </div>
         <div class="panel-footer">

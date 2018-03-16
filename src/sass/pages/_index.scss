@@ -118,7 +118,7 @@ body{
     left: 0;
     z-index: 1000;
     background-color: rgba(0,0,0,.75);
-    display: none;
+    // display: none;
 }
 .model-panel{
     width: 560px;
@@ -156,13 +156,26 @@ body{
 }
 
 .subrow-conf{
-    border-color: #ccc;
-    border-width: 1px 0 0 0;
-    border-style:solid;
+    border-style:none;
+    border-radius: 3px;
+    &.createRow{
+        border:1px solid #ccc;
+    }
     legend{
         padding-right: 10px;
+        margin-left: 5px;
     }
     .checkbox-legend{
         cursor: pointer;
     }
+    .subrow-com-list{
+        display:none;
+        min-height: 20px;
+    }
+}
+.component-list{
+    height:260px;
+    border:1px solid #ddd;
+    border-radius: 3px;
+    margin-bottom: 8px;
 }
