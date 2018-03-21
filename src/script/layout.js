@@ -45,6 +45,14 @@
         closeModel:function(){
             var model=$(this).closest('[data-type]').hide();
         },
+        selectComponent:function(e){
+            var subrow = $('#subrow').prop('checked');
+            if(subrow){
+                $('<span>',{text:$(this).text()}).appendTo('.subrow-com-list');
+            }else{
+                $(this).addClass('active').siblings().removeClass('active');
+            }
+        },
         createSubRow:function(){
             $(this).closest('fieldset').toggleClass('createRow').find('.subrow-com-list').toggle();
         }
