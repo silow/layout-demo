@@ -32,7 +32,7 @@
             t.append(tpl);
         },
         addComponent:function(e){
-            $('[data-type="model"]').one('addComponent',$.proxy(function(e){
+            $('[data-type="modal"]').one('addComponent',$.proxy(function(e){
                 console.log(this);
             },this)).show();
             },
