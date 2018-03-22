@@ -32,7 +32,9 @@ body{
     margin-left: -25px;
     padding-left: 25px;
     outline:1px solid #f90;
-    .card-title{
+    overflow: hidden;
+    &:before{
+        content:"SubRow";
         position: absolute;
         top: 0;
         left: 0;

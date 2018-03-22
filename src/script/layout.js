@@ -1,13 +1,20 @@
 +function($){
     var panel=$('.page-panel'),
-        row=1;
+        row=1,
+        view = $('.view-content .body'),
+        PAGE = {
+            rowID:1,
+            rows:[]
+        }
     $(document).on('click','[data-action]',function(e){
         var key = $(this).data('action');
         Method[key]&& Method[key].call(this,e);
     });
     var Method ={
         addRow:function(e){
-            var tpl =   '<div class="component-row" data-type="row">' +
+            var id = PAGE.rowID;
+            PAGE.rowID+=1;
+            var tpl =   '<div class="component-row" data-type="row" data-row='+id+'>' +
                             '<div class="row-head">' +
                                 ButtonHtml('trash','trash') +
                                 ButtonHtml('clipboard') +
@@ -17,10 +24,21 @@
                             '<div class="row-body">'+
                             '</div></div>';
             panel.append(tpl);
+            ComponentBuild.base.row(id);
+            PAGE.rows.push({
+                colID:1,
+                columns:[]
+            });
         },
         addColumn:function(e){
-            var t = $(this).closest('.row-head').next();
-            var tpl=    '<div class="component-col" data-type="column">' +
+            var row = $(this).closest('.component-row'),
+                t = row.find('.row-body'),
+                id = row.data('row'),
+                viewRow = view.find('[data-row='+id+']')[0],
+                colID = PAGE.rows[id-1].colID;
+                PAGE.rows[id-1].colID+=1;
+
+            var tpl=    '<div class="component-col" data-type="column" data-col='+colID+'>' +
                             '<div class="col-head">' +
                                 ButtonHtml('trash','trash') +
                                 ButtonHtml('clipboard') +
@@ -30,6 +48,7 @@
                             '<div class="col-body">'+
                             '</div></div>';
             t.append(tpl);
+            ComponentBuild.base.column.call(viewRow,colID);
         },
         addComponent:function(e){
             initModal();
@@ -38,7 +57,7 @@
                 var comp =Array.prototype.slice.call(arguments,1),
                     fragment = document.createDocumentFragment();
                 if($('#subrow').prop('checked')&&comp.length > 1){
-                    fragment = $('<div class="col-subrow"><div class="card-title">SubRow</div></div>');
+                    fragment = $('<div class="col-subrow" data-type="subrow"></div>');
                 }
                 for(var i = 0; i<comp.length ; ++i){
                     buildComponent(comp[i],fragment);
@@ -48,7 +67,27 @@
             },body)).show();
         },
         trash:function(e){
-            $(this).closest('[data-type]').remove();
+            var isSubRow = $(this).closest('[data-type="subrow"]').length == 1,
+                comp = $(this).closest('[data-type]'),
+                type = comp.data('type'),
+                id = null,
+                row = null;
+            switch(type){
+                case 'row':
+                    id = comp.data(type);
+                    view.find('[data-row='+id+']').remove();
+                    break;
+                case 'column':
+                    id = comp.closest('[data-type=row]').data('row');
+                    row = view.find('[data-row='+id+']');
+                    id = comp.data('col');
+                    row.find('[data-col='+id+']').remove();
+                    break;
+            }
+            if(isSubRow&&comp.siblings().length==1){
+                comp.unwrap();
+            }
+            comp.remove();
         },
         closeModel:function(){
             var model=$(this).closest('[data-type]').hide();
@@ -76,6 +115,37 @@
             modal.triggerHandler('addComponent',comps);
         }
     }
+
+    var ComponentBuild = {
+        base:{
+            row:function(id){
+                view.append('<div class="row" data-row='+id+'>');
+            },
+            column:function(id){
+                $(this).append('<div class="col" data-col='+id+'>');
+            },
+            subrow:function(){
+                
+            }
+        },
+        components:{
+            Heading:function(){
+            },
+            List:function(){
+    
+            },
+            Grid:function(){
+    
+            },
+            Banner:function(){
+    
+            },
+            Image:function(){
+    
+            }
+        }
+    }
+
     function ButtonHtml(icon,action){
         action = action||'';
         return  '<button class="prop-list-btn" data-action="'+action+'">' +
@@ -91,7 +161,7 @@
         }).appendTo(target);
     }
     function buildComponent(text,target){
-        var tpl = '<div class="component-com">' +
+        var tpl = '<div class="component-com" data-type="component">' +
                         ButtonHtml('trash','trash') +
                         ButtonHtml('clipboard') +
                         '<h6>'+text+'</h6>' +
@@ -104,4 +174,5 @@
         modal.find(':checkbox').prop('checked',false);
         modal.find('.subrow-com-list').empty();
     }
+
 }(jQuery)
