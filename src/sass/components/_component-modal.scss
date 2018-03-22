@@ -32,7 +32,6 @@
         }
     }
     .panel-body{
-        min-height: 256px;
         padding: 8px;
     }
     .panel-footer{
@@ -45,9 +44,7 @@
 .subrow-conf{
     border-style:none;
     border-radius: 3px;
-    &.createRow{
-        border:1px solid #ccc;
-    }
+    border:1px solid #ccc;
     legend{
         padding-right: 10px;
         margin-left: 5px;
@@ -56,12 +53,14 @@
         cursor: pointer;
     }
     .subrow-com-list{
-        display:none;
-        min-height: 20px;
+        min-height: 30px;
+        .subrow-com{
+            @include component-item;
+        }
     }
 }
 .component-list{
-    height:260px;
+    min-height: 128px;
     margin: 0;
     padding-left: 0;
     list-style:none;
@@ -69,21 +68,6 @@
     border-radius: 3px;
     margin-bottom: 8px;
     .component-item{
-       display: inline-block;
-       padding:8px 12px;
-       line-height: 1;
-       &:hover,&.active{
-           font-weight: bold;
-           color:#d80000;
-           cursor: pointer;
-       }
-       &:before{
-           content:attr(data-component);
-           display: block;
-           height: 0;
-           font-weight: bold;
-           overflow: hidden;
-           visibility: hidden;
-       }
+        @include component-item;
     }
 }

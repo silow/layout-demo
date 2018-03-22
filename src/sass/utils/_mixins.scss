@@ -16,3 +16,21 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+@mixin component-item{
+    display: inline-block;
+    padding:8px 12px;
+    line-height: 1;
+    &:hover,&.active{
+        font-weight: bold;
+        color:#d80000;
+        cursor: pointer;
+    }
+    &:before{
+        content:attr(data-component);
+        display: block;
+        height: 0;
+        font-weight: bold;
+        overflow: hidden;
+        visibility: hidden;
+    }
+}
