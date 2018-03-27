@@ -1,23 +1,31 @@
 .body{
-    width: 1024px;
-    padding: 20px;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
     background-color: #fff;
     .row{
-        display: table;
-        width: 970px;
+        display: flex;
+        width: 1070px;
         min-height: 80px;
         margin-left: auto;
         margin-right: auto;
-        border:1px solid #ddd;
+        background-color: #212223;
+        color:#fff;
     }
     .col{
-        display:table-cell;
-        border:1px solid #ddd;
+        flex:1;
+        flex-direction: row;
+        vertical-align: top;
     }
     .component{
-        border:1px solid #888;
         height: 200px;
+    }
+}
+.subrow{
+    display: flex;
+    vertical-align: top;
+    > [data-type="component"]{
+        flex:1;
+        flex-direction: row;
     }
 }

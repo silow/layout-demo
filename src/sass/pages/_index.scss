@@ -56,7 +56,12 @@ body{
     padding: 10px 0;
     border-top:1px dotted #aaa;
     h6{
-        text-indent: 1em;
+        &:before{
+            content:'\203a';
+            line-height: .9;
+            vertical-align: top;
+            letter-spacing: 5px;
+        }
     }
     .card-title + &{
         border-top: 0;

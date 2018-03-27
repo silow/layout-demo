@@ -1,0 +1,50 @@
+.heading{
+    padding:20px 10px;
+    text-align: center;
+
+}
+.nav{
+    height: 50px;
+    color:#fff;
+    background-color: #222;
+    .logo{
+        font-size: 26px;
+        line-height: 50px;
+        margin-left: 10px;
+    }
+}
+.banner{
+    height: 284px;
+    background: url(../images/banner1.png) no-repeat left;
+}
+.image{
+    padding-bottom: 10px;
+    text-align: center;
+    img{
+        width: 324px;
+        height: 227px;
+    }
+}
+.list{
+    line-height: 2;
+    font-size: 15px;
+    .list-items{
+        width: 100%;
+        .item{
+        }
+    }
+}
+.footer{
+    position: relative;
+    margin-top: 20px;
+    padding:50px;
+    text-align:center;
+    &:before{
+        content:'';
+        position: absolute;
+        top: 1px;
+        left: 10px;
+        right: 10px;
+        border-top:1px solid #fff;
+    }
+}
