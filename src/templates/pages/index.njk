@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="css/open-iconic.css">
+{% endblock %}
+{% block content %}
+<div class="page-panel">
+    <div class="component-page">
+        <button class="prop-list-btn" data-action="showProp">
+            <span class="oi" data-glyph="clipboard"></span>
+        </button>
+        <button class="prop-list-btn" data-action="addRow">
+            <span class="oi" data-glyph="plus"></span>
+        </button>
+        <h4>新页面</h4>
+    </div>
+</div>
+<div class="view-content">
+    <div class="body"></div>
+</div>
+{% include "./components/menu-bottom.html" %}
+{% include "./components/component-modal.html" %}
+{% endblock%}
+{% block script%}
+    <script src="js/app.js"></script>
+{% endblock%}

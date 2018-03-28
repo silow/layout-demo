@@ -55,7 +55,7 @@ gulp.task('nunjucks', () => {
 		minifyJS: false,//压缩页面JS  
 		minifyCSS: true//压缩页面CSS  
 	};
-	return gulp.src('src/templates/pages/*.html')
+	return gulp.src('src/templates/pages/*.njk')
 		.pipe(debug({ title: 'unicorn:' }))
 		.pipe(changed(Config.dist, { hasChanged: changed.compareSha1Digest }))
 		.pipe(nunjucks({
